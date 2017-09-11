@@ -15,6 +15,7 @@
     function View(template, map) {
         this.template = template;
         this.map = map;
+        this.latLng = {lat: 10.3157, lng: 123.8854}; //cebu
     }
 
     View.prototype.render = function (viewCmd, parameter) {
@@ -24,8 +25,8 @@
         var viewCommands = {
             showRestaurants: function () {
                 var map = new google.maps.Map(that.map, {
-                  center: {lat: 10.3157, lng: 123.8854},
-                  zoom: 13
+                  center: that.latLng,
+                  zoom: 14
                 });
             }
         };
