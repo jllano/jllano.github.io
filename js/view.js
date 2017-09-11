@@ -12,9 +12,9 @@
      *   - render(command, parameterObject)
      *     Renders the given command with the options
      */
-    function View(template) {
+    function View(template, map) {
         this.template = template;
-        this.map = $('#map');
+        this.map = map;
     }
 
     View.prototype.render = function (viewCmd, parameter) {
@@ -23,7 +23,10 @@
 
         var viewCommands = {
             showRestaurants: function () {
-                //that.map.html(that.template.show(parameter.restaurants));
+                var map = new google.maps.Map(that.map, {
+                  center: {lat: 10.3157, lng: 123.8854},
+                  zoom: 13
+                });
             }
         };
 

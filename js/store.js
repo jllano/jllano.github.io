@@ -20,12 +20,7 @@
 	 */
 	Store.prototype.loadRestaurants = function (callback) {
 		var params = {};
-        
-        var loadRequest = $.getJSON('', params, function (data) {});
-
-		loadRequest.done(function(data){
-			callback.call(this, data)
-		});        
+        callback.call(this);
 	};
 
 	// Export to window
