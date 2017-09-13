@@ -32,6 +32,12 @@
             //infoWindow.setContent('My Location.');
             //infoWindow.open(map);
             
+            var userMarker = new google.maps.Marker({
+                position: pos,
+                map: map,
+                icon: 'https://developers.google.com/maps/documentation/javascript/images/marker_blue.png'
+            });
+
           }, function() {
             that.handleLocationError(true, infoWindow, map.getCenter(), map);
           });
