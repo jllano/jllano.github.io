@@ -59,15 +59,8 @@
 	}
 
 	Template.prototype.showResults = function (result, i) {
-		var i, l;
-		var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
 		var template = this.resultTemplate;
-
-		var results = document.getElementById('results');
-        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-        var markerIcon = MARKER_PATH + markerLetter + '.png';
-
-        var photos = result.photos;
+		var photos = result.photos;
         
         if (!photos) {
             photos = "";
