@@ -26,13 +26,10 @@
             showRestaurants: function () {
                 
                 var places, infoWindow;
-                var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(10.3269964, 123.920972));
-
                 var markers = [];
                 var autocomplete;
                 var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
-                var hostnameRegexp = new RegExp('^https?://.+?/');
-
+                
                 infoWindow = new google.maps.InfoWindow({
                     content: document.getElementById('info-content')
                 });
