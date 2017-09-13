@@ -29,13 +29,11 @@
             };
             that.currentLoc = pos
             infoWindow.setPosition(pos);
-            //infoWindow.setContent('My Location.');
-            //infoWindow.open(map);
             
             var userMarker = new google.maps.Marker({
-                position: pos,
+                position: that.currentLoc,
                 map: map,
-                icon: 'http://www.robotwoods.com/dev/misc/bluecircle.png'
+                icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
             });
 
           }, function() {
