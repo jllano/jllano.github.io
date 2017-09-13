@@ -93,6 +93,13 @@
                 control.style.display = 'block';
                 map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
+                var legend = document.getElementById('legend');
+                var div = document.createElement('div');
+                div.innerHTML = 'Number of restaurant: ';
+                legend.appendChild(div);
+
+                map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
 
