@@ -15,7 +15,9 @@
 	function Template() {
 		this.infoTemplate 
 		=	'<div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">{{place.name}}</h3></div>'
-		+ 	'<div class="panel-body"><table class="table table-bordered">'
+		+ 	'<div class="panel-body">'
+		+	'<div class="pull-left">'
+		+	'<table class="table table-bordered">'
 		+   '	<tr id="iw-url-row" class="iw_table_row">'
 		+	'		<th id="iw-icon" class="iw_table_icon"><img class="restaurantIcon" src="{{place.icon}}"/></th>'
 		+	'		<td id="iw-url" align="left"><b><a href="{{place.url}}">{{place.name}}</a></b></td>'
@@ -36,7 +38,12 @@
         +	'		<th class="iw_attribute_name">Website:</th>'
         +	'		<td align="left" id="iw-website">{{website}}</td>'
         +	'	</tr>'
-        +	'</table></div></div>';
+        +	'</table>'
+        +	'</div>'
+        +	'<div class="pull-right">'
+        +	'right panel'
+        +	'</div>'
+        +	'</div></div>';
 
         this.resultTemplate
         = 	'<tr>'
