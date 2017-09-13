@@ -8,12 +8,12 @@
 	 * @param {object} model The model instance
 	 * @param {object} view The view instance
 	 */
-	function Controller(model, view) {
+	function Controller(model, view, request) {
 		var that = this;
 		
 		that.model = model;
 		that.view = view;
-
+		that.request = request;
 	}
 
 	/**
@@ -23,7 +23,7 @@
 		var that = this;
 
 		that.model.getRestaurants(function (data) {
-			that.view.render('showRestaurants', data);
+			that.view.render('showRestaurants', data, that.request);
 		});
 
 	};

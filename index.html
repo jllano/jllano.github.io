@@ -70,12 +70,21 @@
             this.lat = 10.3269964;
             this.lng = 123.920972;
             this.latLng = {lat: this.lat, lng: this.lng}; //cebu
+            this.radius = 5000;
+
+            var request = {
+                location: this.latLng,
+                // /bounds: map.getBounds(),
+                type: ['restaurant'],
+                radius: this.radius,
+                keyword: 'restaurant food'
+            };
 
             this.storage = new app.Store(document.getElementById('map'), this.latLng);
             this.model = new app.Model(this.storage);
             this.template = new app.Template();
-            this.view = new app.View(this.template, this.latLng);
-            this.controller = new app.Controller(this.model, this.view);
+            this.view = new app.View(this.template);
+            this.controller = new app.Controller(this.model, this.view, request);
           }
           var Restaurant = new Restaurant();
           Restaurant.controller.loadRestaurants();

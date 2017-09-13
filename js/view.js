@@ -12,13 +12,11 @@
      *   - render(command, parameterObject)
      *     Renders the given command with the options
      */
-    function View(template, latLng) {
+    function View(template) {
         this.template = template;
-        this.latLng = latLng;
-        this.radius = 5000;
     }
 
-    View.prototype.render = function (viewCmd, map) {
+    View.prototype.render = function (viewCmd, map, request) {
         
         var that = this;
 
@@ -59,14 +57,10 @@
                 }
 
                 function search() {
-                    var request = {
-                        location: that.latLng,
-                        bounds: map.getBounds(),
-                        type: ['restaurant'],
-                        radius: that.radius,
-                        keyword: 'restaurant food'
-
-                    };
+                    
+                    //append new element bound
+                    //bound to current map only
+                    request.bounds = map.getBounds();
 
                     places.nearbySearch(request, function(results, status) {
                       if (status === google.maps.places.PlacesServiceStatus.OK) {
