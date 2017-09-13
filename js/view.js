@@ -28,10 +28,9 @@
               lng: position.coords.longitude
             };
             that.currentLoc = pos
-            console.log(pos);
             infoWindow.setPosition(pos);
             infoWindow.setContent('My Location.');
-            infoWindow.open(map);
+            //infoWindow.open(map);
             
           }, function() {
             that.handleLocationError(true, infoWindow, map.getCenter(), map);
