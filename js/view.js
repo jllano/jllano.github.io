@@ -14,6 +14,41 @@
      */
     function View(template) {
         this.template = template;
+        this.currentLoc = "";
+    }
+
+    View.prototype.getMyCurrentLocation = function(infoWindow, map){
+
+        var that = this;
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            that.currentLoc = pos
+            console.log(pos);
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('My Location.');
+            infoWindow.open(map);
+            
+          }, function() {
+            that.handleLocationError(true, infoWindow, map.getCenter(), map);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          that.handleLocationError(false, infoWindow, map.getCenter(), map);
+        }
+    } 
+
+
+    View.prototype.handleLocationError = function(browserHasGeolocation, infoWindow, pos, map) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
     }
 
     View.prototype.render = function (viewCmd, map, request) {
@@ -31,6 +66,8 @@
                 infoWindow = new google.maps.InfoWindow({
                     content: document.getElementById('info-content')
                 });
+
+                that.getMyCurrentLocation(infoWindow, map);
 
                 autocomplete = new google.maps.places.Autocomplete((
                     document.getElementById('autocomplete')), {
