@@ -8,56 +8,134 @@
      * It has two simple entry points:
      *
      *   - bind(eventName, handler)
-     *     Takes a helpdesk application event and registers the handler
+     *     Takes a map application event and registers the handler
      *   - render(command, parameterObject)
      *     Renders the given command with the options
      */
-    function View(template, map) {
+    function View(template, latLng) {
         this.template = template;
-        this.map = map;
-        this.latLng = {lat: 10.3157, lng: 123.8854}; //cebu
+        this.latLng = latLng;
+        this.radius = 5000;
     }
 
-    View.prototype.render = function (viewCmd, parameter) {
+    View.prototype.render = function (viewCmd, map) {
         
         var that = this;
 
         var viewCommands = {
             showRestaurants: function () {
-                var map = new google.maps.Map(that.map, {
-                  center: that.latLng,
-                  zoom: 15
+                
+                var places, infoWindow;
+                var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(10.3269964, 123.920972));
+
+                var markers = [];
+                var autocomplete;
+                var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
+                var hostnameRegexp = new RegExp('^https?://.+?/');
+
+                infoWindow = new google.maps.InfoWindow({
+                    content: document.getElementById('info-content')
                 });
 
-                var infowindow = new google.maps.InfoWindow();
-                var service = new google.maps.places.PlacesService(map);
-                
-                service.nearbySearch({
-                  location: that.latLng,
-                  radius: 5000,
-                  type: ['Restaurants']
-                }, callback);
+                autocomplete = new google.maps.places.Autocomplete((
+                    document.getElementById('autocomplete')), {
+                        types: ['establishment'],
+                });
 
+                autocomplete.bindTo('bounds', map);
 
-                function callback(results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-                            createMarker(results[i]);
-                        }
+                places = new google.maps.places.PlacesService(map);
+
+                autocomplete.addListener('place_changed', onPlaceChanged);
+                search();
+
+                function onPlaceChanged() {
+                    var place = autocomplete.getPlace();
+
+                    if (place.geometry) {
+                      map.panTo(place.geometry.location);
+                      map.setZoom(15);
+                      search();
+                    } else {
+                      document.getElementById('autocomplete').placeholder = 'Enter a restaurant in Cebu';
                     }
                 }
 
-                function createMarker(place) {
-                    var placeLoc = place.geometry.location;
-                    var marker = new google.maps.Marker({
-                    map: map,
-                        position: place.geometry.location
-                    });
+                function search() {
+                    var request = {
+                        location: that.latLng,
+                        bounds: map.getBounds(),
+                        type: ['restaurant'],
+                        radius: that.radius,
+                        keyword: 'restaurant food'
 
-                    google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.setContent(place.name);
-                        infowindow.open(map, this);
+                    };
+
+                    places.nearbySearch(request, function(results, status) {
+                      if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        clearResults();
+                        clearMarkers();
+                        
+                        for (var i = 0; i < results.length; i++) {
+                          var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+                          var markerIcon = MARKER_PATH + markerLetter + '.png';
+                          
+                          markers[i] = new google.maps.Marker({
+                            position: results[i].geometry.location,
+                            animation: google.maps.Animation.DROP,
+                            icon: markerIcon
+                          });
+                          
+                          markers[i].placeResult = results[i];
+                          google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+                          setTimeout(dropMarker(i), i * 100);
+                          addResult(results[i], i);
+                        }
+                      }
                     });
+                }
+
+                function clearMarkers() {
+                    for (var i = 0; i < markers.length; i++) {
+                      if (markers[i]) {
+                        markers[i].setMap(null);
+                      }
+                    }
+                    markers = [];
+                }
+
+                function dropMarker(i) {
+                    return function() {
+                      markers[i].setMap(map);
+                    };
+                }
+
+                function addResult(result, i) {
+                    var tr = $(that.template.showResults(result, i));
+
+                    $("#results").append(tr);
+
+                    tr.bind("click", function() {
+                      google.maps.event.trigger(markers[i], 'click');
+                    });
+                }
+
+                function clearResults() {
+                    $("#results").children().remove();
+                }
+
+                function showInfoWindow() {
+                    var marker = this;
+                    places.getDetails({placeId: marker.placeResult.place_id},
+                        function(place, status) {
+                          if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                            return;
+                          }
+
+                          infoWindow.open(map, marker);
+                          $("#info-content").html(that.template.showInfo(place));
+                        }
+                    );
                 }
             }
         };

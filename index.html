@@ -7,23 +7,8 @@
     <title>Google Map - MVC approach</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <style>
-      body {
-        padding-top: 54px;
-        height: 100%;
-      }
-      @media (min-width: 992px) {
-        body {
-          padding-top: 56px;
-          height: 100%;
-        }
-      }
-      #map {
-        height: 700%;
-        margin-top:100px;
-      }
-    </style>
+    <link href="css/app.css" rel="stylesheet">
+    
   </head>
   <body>
   <!-- Navigation -->
@@ -40,9 +25,25 @@
     </nav>
     <!-- Page Content -->
     <div class="container">
+       <br/><br/><br/>
       <div class="row">
         <div class="col-lg-12 text-center">
-            <div id="map">dsdsd</div>
+
+            <div id="locationField">
+              <input id="autocomplete" placeholder="Enter a Restaurant in Cebu" type="text" />
+            </div>
+
+            <div id="map"></div>
+
+            <div id="listing">
+              <table id="resultsTable" class="table table-striped">
+                <tbody id="results"></tbody>
+              </table>
+            </div>
+
+            <div style="display: none">
+              <div id="info-content"></div>
+            </div>
         </div>
       </div>
     </div>
@@ -66,11 +67,14 @@
 
           function Restaurant() {
             
-            this.storage = new app.Store();
+            this.lat = 10.3269964;
+            this.lng = 123.920972;
+            this.latLng = {lat: this.lat, lng: this.lng}; //cebu
+
+            this.storage = new app.Store(document.getElementById('map'), this.latLng);
             this.model = new app.Model(this.storage);
             this.template = new app.Template();
-            this.mapContainer = document.getElementById('map');
-            this.view = new app.View(this.template, this.mapContainer);
+            this.view = new app.View(this.template, this.latLng);
             this.controller = new app.Controller(this.model, this.view);
           }
           var Restaurant = new Restaurant();

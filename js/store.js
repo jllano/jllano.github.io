@@ -3,14 +3,13 @@
 	'use strict';
 
 	/**
-	 * Storage REST api constructor
+	 * Storage api constructor
 	 *
-	 * @param {function} callback Our fake DB uses callbacks because in
-	 * real life you probably would be making AJAX calls
 	 */
-	function Store(callback) {
-		callback = callback || function () {};
-	}
+	function Store(mapContainer, latLng) {
+		this.mapContainer = map;
+		this.latLng = latLng;
+    }
 
 	/**
 	 * Load data by making request to the server
@@ -20,8 +19,18 @@
 	 */
 	Store.prototype.loadRestaurants = function (callback) {
 		var params = {};
-        callback.call(this);
-	};
+        //callback.call(this);
+         var that = this;
+
+        var map;
+        
+        map = new google.maps.Map(that.mapContainer, {
+          center: that.latLng,
+          zoom: 13,
+        });
+
+        callback.call(this, map);
+    };
 
 	// Export to window
 	window.app = window.app || {};

@@ -1,0 +1,53 @@
+#map {
+  height: 800px;
+  width: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#listing {
+  position: absolute;
+  width: 200px;
+  height: 800px;
+  overflow: auto;
+  left: -190px;
+  top: 0px;
+  cursor: pointer;
+  overflow-x: hidden;
+}
+#locationField {
+  position: absolute;
+  width: 390px;
+  height: 25px;
+  left: 155px;
+  top: 10px;
+  z-index: 5;
+  background-color: #fff;
+}
+#controls {
+  position: absolute;
+  left: 300px;
+  width: 140px;
+  top: 0px;
+  z-index: 5;
+  background-color: #fff;
+}
+#autocomplete {
+  width: 100%;
+}
+.placeIcon {
+  width: 64px;
+  height: 64px;
+  margin: 4px;
+}
+.restaurantIcon {
+  width: 150px;
+  height: 150px;
+}
+#rating {
+  font-size: 13px;
+  font-family: Arial Unicode MS;
+}
