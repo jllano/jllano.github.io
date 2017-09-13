@@ -29,7 +29,7 @@
             };
             that.currentLoc = pos
             infoWindow.setPosition(pos);
-            infoWindow.setContent('My Location.');
+            //infoWindow.setContent('My Location.');
             //infoWindow.open(map);
             
           }, function() {
