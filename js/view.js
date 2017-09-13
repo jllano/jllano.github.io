@@ -84,6 +84,10 @@
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 search();
 
+                var directionsService = new google.maps.DirectionsService;
+                var directionsDisplay = new google.maps.DirectionsRenderer;
+                directionsDisplay.setMap(map);
+
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
 
@@ -157,9 +161,6 @@
 
                 function showInfoWindow() {
                     var marker = this;
-                    var directionsService = new google.maps.DirectionsService;
-                    var directionsDisplay = new google.maps.DirectionsRenderer;
-                    
                     places.getDetails({placeId: marker.placeResult.place_id},
                         function(place, status) {
                             if (status !== google.maps.places.PlacesServiceStatus.OK) {
