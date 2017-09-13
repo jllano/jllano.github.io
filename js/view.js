@@ -87,6 +87,11 @@
                 var directionsService = new google.maps.DirectionsService;
                 var directionsDisplay = new google.maps.DirectionsRenderer;
                 directionsDisplay.setMap(map);
+                directionsDisplay.setPanel(document.getElementById('right-panel'));
+
+                var control = document.getElementById('floating-panel');
+                control.style.display = 'block';
+                map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
