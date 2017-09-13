@@ -35,7 +35,7 @@
             var userMarker = new google.maps.Marker({
                 position: pos,
                 map: map,
-                icon: 'https://developers.google.com/maps/documentation/javascript/images/marker_blue.png'
+                icon: 'http://www.robotwoods.com/dev/misc/bluecircle.png'
             });
 
           }, function() {
