@@ -157,14 +157,30 @@
 
                 function showInfoWindow() {
                     var marker = this;
+                    var directionsService = new google.maps.DirectionsService;
+                    var directionsDisplay = new google.maps.DirectionsRenderer;
+                    
                     places.getDetails({placeId: marker.placeResult.place_id},
                         function(place, status) {
-                          if (status !== google.maps.places.PlacesServiceStatus.OK) {
-                            return;
-                          }
+                            if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                                return;
+                            }
 
-                          infoWindow.open(map, marker);
-                          $("#info-content").html(that.template.showInfo(place));
+                            infoWindow.open(map, marker);
+                            $("#info-content").html(that.template.showInfo(place));
+
+                            directionsService.route({
+                              origin: that.currentLoc,
+                              destination: place.formatted_address,
+                              travelMode: 'DRIVING'
+                            }, function(response, status) {
+                              if (status === 'OK') {
+                                directionsDisplay.setDirections(response);
+                              } else {
+                                window.alert('Directions request failed due to ' + status);
+                              }
+                            });
+
                         }
                     );
                 }
