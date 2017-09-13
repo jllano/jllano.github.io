@@ -167,9 +167,6 @@
                                 return;
                             }
 
-                            infoWindow.open(map, marker);
-                            $("#info-content").html(that.template.showInfo(place));
-
                             directionsService.route({
                               origin: that.currentLoc,
                               destination: place.formatted_address,
@@ -177,11 +174,14 @@
                             }, function(response, status) {
                               if (status === 'OK') {
                                 directionsDisplay.setDirections(response);
+                                
+                                infoWindow.open(map, marker);
+                                $("#info-content").html(that.template.showInfo(place));
+
                               } else {
                                 window.alert('Directions request failed due to ' + status);
                               }
                             });
-
                         }
                     );
                 }
