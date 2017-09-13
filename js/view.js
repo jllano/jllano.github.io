@@ -94,6 +94,7 @@
                 map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
                 var legend = document.getElementById('legend');
+                legend.style.display = 'block';
                 var div = document.createElement('div');
                 div.innerHTML = 'Number of restaurant: ';
                 legend.appendChild(div);
