@@ -84,13 +84,6 @@
 
                 places = new google.maps.places.PlacesService(map);
                 
-                /*
-                places.textSearch(request, callback);
-                function callback(results, status) {
-                  console.log(results.length);
-                }
-                */
-               
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 search();
 
@@ -98,7 +91,6 @@
                 var directionsDisplay = new google.maps.DirectionsRenderer;
                 directionsDisplay.setMap(map);
                 directionsDisplay.setPanel(document.getElementById('right-panel'));
-
 
                 var directionPanel = document.getElementById('floating-panel');
                 directionPanel.style.display = 'block';
@@ -109,13 +101,17 @@
                 stats.css({'border':'3px solid #000'});
                 map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('legend'));
 
+                map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('filters'));
+
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
 
+                    request.keyword = place.name;
+                    
                     if (place.geometry) {
-                      map.panTo(place.geometry.location);
-                      map.setZoom(13);
-                      search();
+                        map.panTo(place.geometry.location);
+                        map.setZoom(13);
+                        search();
                     } else {
                       document.getElementById('autocomplete').placeholder = 'Enter a restaurant in Cebu';
                     }
@@ -128,32 +124,28 @@
                     request.bounds = map.getBounds();
 
                     places.nearbySearch(request, function(results, status) {
-                      if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        clearResults();
-                        clearMarkers();
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            clearResults();
+                            clearMarkers();
                         
-                        for (var i = 0; i < results.length; i++) {
-                          var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-                          var markerIcon = MARKER_PATH + markerLetter + '.png';
-                          
-                          markers[i] = new google.maps.Marker({
-                            position: results[i].geometry.location,
-                            animation: google.maps.Animation.DROP,
-                            icon: markerIcon
-                          });
-                          
-                          markers[i].placeResult = results[i];
-                          google.maps.event.addListener(markers[i], 'click', showInfoWindow);
-                          setTimeout(dropMarker(i), i * 100);
-                          addResult(results[i], i);
-                        }
+                            for (var i = 0; i < results.length; i++) {
+                                var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+                                var markerIcon = MARKER_PATH + markerLetter + '.png';
+                              
+                                markers[i] = new google.maps.Marker({
+                                    position: results[i].geometry.location,
+                                    animation: google.maps.Animation.DROP,
+                                    icon: markerIcon
+                                });
+                              
+                                markers[i].placeResult = results[i];
+                                google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+                                setTimeout(dropMarker(i), i * 100);
+                                addResult(results[i], i);
+                            }
 
-                        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('listing'));
-                        
-
-                        //console.log(markers);     
-                        stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
-
+                            map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('listing'));
+                            stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
                       }
                     });
                 }
@@ -197,19 +189,18 @@
                             }
 
                             directionsService.route({
-                              origin: that.currentLoc,
-                              destination: place.formatted_address,
-                              travelMode: 'DRIVING'
+                                origin: that.currentLoc,
+                                destination: place.formatted_address,
+                                travelMode: 'DRIVING'
                             }, function(response, status) {
-                              if (status === 'OK') {
-                                directionsDisplay.setDirections(response);
-                                
-                                infoWindow.open(map, marker);
-                                $("#info-content").html(that.template.showInfo(place));
+                                if (status === 'OK') {
+                                    directionsDisplay.setDirections(response);
+                                    infoWindow.open(map, marker);
+                                    $("#info-content").html(that.template.showInfo(place));
 
-                              } else {
-                                window.alert('Directions request failed due to ' + status);
-                              }
+                                } else {
+                                    window.alert('Directions request failed due to ' + status);
+                                }
                             });
                         }
                     );

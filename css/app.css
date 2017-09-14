@@ -16,7 +16,7 @@ html, body {
   height: 600px;
   overflow: auto;
   /*left: -190px;*/
-  top: 230px;
+  top: 120px;
   cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;
@@ -25,6 +25,21 @@ html, body {
   filter: alpha(opacity=90); /* For IE8 and earlier */
   color: #000;
 }
+#filters{
+  /*width: 200px;*/
+  height: 60px;
+  overflow: auto;
+  /*left: -190px;*/
+  top: 60px;
+  cursor: pointer;
+  overflow-x: hidden;
+  background-color: #fff;
+  border: 1px solid black;
+  opacity: 0.9;
+  filter: alpha(opacity=90); /* For IE8 and earlier */
+  color: #000;
+}
+
 #locationField {
   position: absolute;
   width: 390px;
