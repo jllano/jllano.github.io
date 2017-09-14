@@ -262,7 +262,7 @@
             drawingControl: true,
             drawingControlOptions: {
               position: google.maps.ControlPosition.BOTTOM_CENTER,
-              drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+              drawingModes: ['circle', 'rectangle']
             },
             markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
             circleOptions: {
@@ -279,6 +279,25 @@
 
         drawingManager.setOptions({
             drawingControl: true
+        });
+
+        /*
+        google.maps.event.addListener(drawingManager, 'circlecomplete', function(circle) {
+          var radius = circle.getRadius();
+        });
+        */
+       
+        google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+
+          if (event.type == 'circle') {
+            //var radius = event.overlay.getRadius();
+          }
+          if (event.type == 'rectangle') {
+            //var radius = event.overlay.getRadius();
+          }
+
+          console.log(event);
+
         });
 
     };
