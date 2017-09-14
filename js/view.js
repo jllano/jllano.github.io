@@ -93,14 +93,6 @@
                 control.style.display = 'block';
                 map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
-                var legend = document.getElementById('legend');
-                legend.style.display = 'block';
-                var div = document.createElement('div');
-                div.innerHTML = 'Number of restaurant: ';
-                legend.appendChild(div);
-
-                map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
-
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
 
@@ -139,6 +131,17 @@
                           setTimeout(dropMarker(i), i * 100);
                           addResult(results[i], i);
                         }
+
+                        var stats = $('#legend');
+                        stats.show();
+                        stats.css({'border':'3px solid #000;'});
+                        stats.html('<h3>Stats</h3>');
+
+                        var div = document.createElement('div');
+                        div.innerHTML = 'Number of restaurant: <b>' + results.length + '</b>';
+                        stats.append(div);
+
+                        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
                       }
                     });
                 }
