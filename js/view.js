@@ -258,7 +258,7 @@
 
     View.prototype.bindDrawingManager = function (map) {
         var drawingManager = new google.maps.drawing.DrawingManager({
-            drawingMode: google.maps.drawing.OverlayType.MARKER,
+            //drawingMode: google.maps.drawing.OverlayType.MARKER,
             drawingControl: true,
             drawingControlOptions: {
               position: google.maps.ControlPosition.BOTTOM_CENTER,
@@ -296,7 +296,7 @@
             //var radius = event.overlay.getRadius();
           }
 
-          console.log(event);
+          console.log(event.overlay);
 
         });
 
