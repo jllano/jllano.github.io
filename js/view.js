@@ -134,7 +134,7 @@
 
                         var stats = $('#legend');
                         stats.show();
-                        stats.css({'border':'3px solid #000;'});
+                        stats.css({'border':'3px solid #000'});
                         stats.html('<h3>Stats</h3>');
 
                         var div = document.createElement('div');
