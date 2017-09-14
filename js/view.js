@@ -88,6 +88,7 @@
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 nearbySearch();
                 that.bindFilters(request, places, map, textSearch);
+                that.bindDrawingManager(map);
 
                 var directionsService = new google.maps.DirectionsService;
                 var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -255,7 +256,7 @@
         
     };
 
-    View.prototype.bindFilters = function (map) {
+    View.prototype.bindDrawingManager = function (map) {
         var drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: google.maps.drawing.OverlayType.MARKER,
             drawingControl: true,
