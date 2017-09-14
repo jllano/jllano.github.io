@@ -85,7 +85,7 @@
                 places = new google.maps.places.PlacesService(map);
                 
                 autocomplete.addListener('place_changed', onPlaceChanged);
-                search();
+                nearbySearch();
 
                 var directionsService = new google.maps.DirectionsService;
                 var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -105,49 +105,60 @@
 
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
+                    var newRequest = {
+                        location: request.location,
+                        bounds: map.getBounds(),
+                        //type: ['restaurant'],
+                        radius: request.radius,
+                        query: place.name
+                    };
 
-                    request.keyword = place.name;
-                    
                     if (place.geometry) {
                         map.panTo(place.geometry.location);
                         map.setZoom(13);
-                        search();
+                        places.textSearch(newRequest, textSearch);
                     } else {
                       document.getElementById('autocomplete').placeholder = 'Enter a restaurant in Cebu';
                     }
                 }
 
-                function search() {
-                    
-                    //append new element bound
+                function textSearch(results, status) {
+                    processSearch(results, status);
+                }
+
+                function nearbySearch() {
+                    //append new element bounds
                     //bound to current map only
                     request.bounds = map.getBounds();
-
                     places.nearbySearch(request, function(results, status) {
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            clearResults();
-                            clearMarkers();
-                        
-                            for (var i = 0; i < results.length; i++) {
-                                var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-                                var markerIcon = MARKER_PATH + markerLetter + '.png';
-                              
-                                markers[i] = new google.maps.Marker({
-                                    position: results[i].geometry.location,
-                                    animation: google.maps.Animation.DROP,
-                                    icon: markerIcon
-                                });
-                              
-                                markers[i].placeResult = results[i];
-                                google.maps.event.addListener(markers[i], 'click', showInfoWindow);
-                                setTimeout(dropMarker(i), i * 100);
-                                addResult(results[i], i);
-                            }
-
-                            map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('listing'));
-                            stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
-                      }
+                        processSearch(results, status);
                     });
+                }
+
+                function processSearch(results, status){
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        clearResults();
+                        clearMarkers();
+                    
+                        for (var i = 0; i < results.length; i++) {
+                            var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+                            var markerIcon = MARKER_PATH + markerLetter + '.png';
+                          
+                            markers[i] = new google.maps.Marker({
+                                position: results[i].geometry.location,
+                                animation: google.maps.Animation.DROP,
+                                icon: markerIcon
+                            });
+                          
+                            markers[i].placeResult = results[i];
+                            google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+                            setTimeout(dropMarker(i), i * 100);
+                            addResult(results[i], i);
+                        }
+
+                        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('listing'));
+                        stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
+                    }
                 }
 
                 function clearMarkers() {
