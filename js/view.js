@@ -61,6 +61,7 @@
         var viewCommands = {
             showRestaurants: function () {
                 
+                var resultsFound = 0;
                 var places, infoWindow;
                 var markers = [];
                 var autocomplete;
@@ -92,6 +93,11 @@
                 var control = document.getElementById('floating-panel');
                 control.style.display = 'block';
                 map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+                var stats = $('#legend');
+                stats.show();
+                stats.css({'border':'3px solid #000'});
+                map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
 
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
@@ -132,16 +138,8 @@
                           addResult(results[i], i);
                         }
 
-                        var stats = $('#legend');
-                        stats.show();
-                        stats.css({'border':'3px solid #000'});
-                        stats.html('<h3>Stats</h3>');
-
-                        var div = document.createElement('div');
-                        div.innerHTML = 'Number of restaurant: <b>' + results.length + '</b>';
-                        stats.append(div);
-
-                        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
+                        stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
+                        
                       }
                     });
                 }
