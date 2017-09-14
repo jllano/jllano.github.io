@@ -161,7 +161,7 @@
                         }
 
                         map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('listing'));
-                        stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
+                        //stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
                     }
                 }
 
@@ -253,6 +253,41 @@
         });
 
         
+    };
+
+    View.prototype.bindFilters = function (map) {
+        var drawingManager = new google.maps.drawing.DrawingManager({
+            drawingMode: google.maps.drawing.OverlayType.MARKER,
+            drawingControl: true,
+            drawingControlOptions: {
+              position: google.maps.ControlPosition.TOP_CENTER,
+              drawingModes: ['rectangle']
+            },
+            markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+            circleOptions: {
+              fillColor: '#ffff00',
+              fillOpacity: 1,
+              strokeWeight: 5,
+              clickable: false,
+              editable: true,
+              zIndex: 1
+            }
+        });
+        
+        drawingManager.setMap(map);
+
+        drawingManager.setOptions({
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.BOTTOM_CENTER,
+            drawingModes: ['marker']
+          }
+        });
+
+        // To show:
+        drawingManager.setOptions({
+            drawingControl: true
+        });
+
     };
 
     // Export to window
