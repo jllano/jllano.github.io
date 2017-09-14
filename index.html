@@ -24,37 +24,35 @@
       </div>
     </nav>
     <!-- Page Content -->
-    <div class="container">
-       <br/><br/><br/>
-        <div id="floating-panel"></div>
-        <div class="row">
-        <div class="col-lg-12 text-center">
+    
+    <br/>  
+    <br/>
+    <div id="floating-panel"></div>
+        
+    <div id="map" style="overflow:inherit;"></div>
 
-            <div id="locationField" class="form-group">
-              <input class="form-control" id="autocomplete" placeholder="Enter a Restaurant in Cebu" type="text" />
-            </div>
-            <table width="100%">
-              <tr>
-                <td valign="top" width="100%">
-                  <div id="legend"></div>
-                  <div id="map"></div>
-                </td>
-                <td valign="top" width="100%"><div id="right-panel"></div></td>
-              </tr>
-            </table>              
 
-            <div id="listing">
-              <table id="resultsTable" class="table table-striped">
-                <tbody id="results"></tbody>
-              </table>
-            </div>
-
-            <div style="display: none">
-              <div id="info-content"></div>
-            </div>
-        </div>
-      </div>
+    <div id="locationField" class="form-group">
+      <input class="form-control" id="autocomplete" placeholder="Enter a Restaurant in Cebu" type="text" />
     </div>
+    
+    <div id="legend"></div>
+    
+    <div id="right-panel">
+          
+
+    <div id="listing">
+      <table id="resultsTable" class="table table-striped">
+        <tbody id="results"></tbody>
+      </table>
+    </div>
+
+    <div style="display: none">
+      <div id="info-content"></div>
+    </div>
+        
+      
+    
     <!-- Bootstrap core JavaScript -->
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/popper.min.js"></script>

@@ -147,6 +147,9 @@
                           addResult(results[i], i);
                         }
 
+                        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('listing'));
+                        
+
                         //console.log(markers);     
                         stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
 

@@ -1,20 +1,23 @@
 #map {
-  height: 800px;
+  height: 93%;
   width:100%;
+  margin-top: 10px;
+  
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  width: auto;
 }
 #listing {
-  position: absolute;
-  width: 200px;
-  height: 800px;
+  
+  /*width: 200px;*/
+  height: 600px;
   overflow: auto;
-  left: -190px;
-  top: 0px;
+  /*left: -190px;*/
+  top: 200px;
   cursor: pointer;
   overflow-x: hidden;
 }
@@ -96,6 +99,9 @@ html, body {
     height: 800px;
     width:100%;
     margin: 0;
+    position: inherit !important;
+    overflow: hidden;
+}
   }
   #right-panel {
     float: none;
