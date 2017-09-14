@@ -28,7 +28,14 @@ html, body {
   background-color: #fff;
   margin-top: 20px;
 }
-
+#controls {
+  position: absolute;
+  left: 300px;
+  width: 140px;
+  top: 0px;
+  z-index: 5;
+  background-color: #fff;
+}
 #autocomplete {
   width: 100%;
 }
