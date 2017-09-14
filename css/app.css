@@ -62,6 +62,10 @@ html, body {
 
 #floating-panel {
   display: none;
+  overflow: auto;
+  /*left: -190px;*/
+  top: 230px;
+  cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;
   border: 1px solid black;
