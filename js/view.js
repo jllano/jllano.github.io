@@ -15,6 +15,7 @@
     function View(template) {
         this.template = template;
         this.currentLoc = "";
+        this.filters = [];
     }
 
     View.prototype.getMyCurrentLocation = function(infoWindow, map){
@@ -86,6 +87,7 @@
                 
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 nearbySearch();
+                that.bindFilters(request, places, map, textSearch);
 
                 var directionsService = new google.maps.DirectionsService;
                 var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -101,7 +103,7 @@
                 stats.css({'border':'3px solid #000'});
                 map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('legend'));
 
-                map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('filters'));
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('filters'));
 
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
@@ -222,7 +224,34 @@
         viewCommands[viewCmd]();
     };
 
-    
+    View.prototype.bindFilters = function (request, places, map, textSearch) {
+        var that = this;    
+
+        var filters = $( "#filters input:checkbox" );
+
+        $(filters).click(function() {
+            
+            if ($(this).is(':checked')) {
+                that.filters.unshift($(this).val());
+            } else {
+                that.filters.splice( $.inArray($(this).val(), that.filters), 1 );
+            }
+            
+            var newRequest = {
+                location: request.location,
+                bounds: map.getBounds(),
+                //type: ['restaurant'],
+                radius: request.radius,
+                query: that.filters.toString()
+            };
+
+            places.textSearch(newRequest, textSearch);    
+            
+        });
+
+        
+    };
+
     // Export to window
     window.app = window.app || {};
     window.app.View = View;

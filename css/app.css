@@ -31,7 +31,8 @@ html, body {
   height: 170px;
   overflow: auto;
   /*left: -190px;*/
-  top: 670px;
+  /*top: 670px;*/
+  margin-right: 10px;
   cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;
