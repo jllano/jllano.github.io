@@ -98,10 +98,12 @@
                 directionPanel.style.display = 'block';
                 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(directionPanel);
 
+                /*
                 var stats = $('#legend');
                 stats.show();
                 stats.css({'border':'3px solid #000'});
-                map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('legend'));
+                */
+                //map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('legend'));
 
                 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('filters'));
 
