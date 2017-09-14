@@ -99,9 +99,9 @@
                 directionsDisplay.setMap(map);
                 directionsDisplay.setPanel(document.getElementById('right-panel'));
 
-                var control = document.getElementById('floating-panel');
-                control.style.display = 'block';
-                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('right-panel'));
+                var direction = document.getElementById('floating-panel');
+                direction.style.display = 'block';
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(direction);
 
                 var stats = $('#legend');
                 stats.show();
