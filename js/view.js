@@ -240,9 +240,10 @@
             var newRequest = {
                 location: request.location,
                 bounds: map.getBounds(),
-                //type: ['restaurant'],
+                type: request.type,
                 radius: request.radius,
-                query: that.filters.toString()
+                query: 'restaurant, ' + that.filters.toString(),
+                keyword: that.filters.toString()
             };
 
             places.textSearch(newRequest, textSearch);    
