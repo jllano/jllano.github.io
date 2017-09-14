@@ -106,7 +106,7 @@
                 var stats = $('#legend');
                 stats.show();
                 stats.css({'border':'3px solid #000'});
-                map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
+                map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('legend'));
 
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
