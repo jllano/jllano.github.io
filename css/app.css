@@ -17,9 +17,14 @@ html, body {
   height: 600px;
   overflow: auto;
   /*left: -190px;*/
-  top: 200px;
+  top: 230px;
   cursor: pointer;
   overflow-x: hidden;
+  background-color: #fff;
+  border: 1px solid black;
+  opacity: 0.7;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+  color: #000;
 }
 #locationField {
   position: absolute;
@@ -71,6 +76,7 @@ html, body {
   font-family: Arial;
   display: none;
 
+
 }
 #right-panel {
   font-family: 'Roboto','sans-serif';
@@ -84,6 +90,11 @@ html, body {
 
 #right-panel select {
   width: 100%;
+  background-color: #fff;
+  border: 1px solid black;
+  opacity: 0.7;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+  color: #000;
 }
 
 #right-panel i {
