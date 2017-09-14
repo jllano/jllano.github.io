@@ -99,6 +99,11 @@
                 directionsDisplay.setMap(map);
                 directionsDisplay.setPanel(document.getElementById('right-panel'));
 
+
+                var directionPanel = document.getElementById('floating-panel');
+                directionPanel.style.display = 'block';
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(directionPanel);
+
                 var stats = $('#legend');
                 stats.show();
                 stats.css({'border':'3px solid #000'});
@@ -184,16 +189,12 @@
 
                 function showInfoWindow() {
                     var marker = this;
-                    var directionPanel = document.getElementById('floating-panel');
-
+                    
                     places.getDetails({placeId: marker.placeResult.place_id},
                         function(place, status) {
                             if (status !== google.maps.places.PlacesServiceStatus.OK) {
                                 return;
                             }
-
-                            directionPanel.style.display = 'block';
-                            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(directionPanel);
 
                             directionsService.route({
                               origin: that.currentLoc,
