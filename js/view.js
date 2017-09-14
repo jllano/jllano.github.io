@@ -78,10 +78,19 @@
                         types: ['establishment'],
                 });
 
+                map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('locationField'));
+
                 autocomplete.bindTo('bounds', map);
 
                 places = new google.maps.places.PlacesService(map);
-
+                
+                /*
+                places.textSearch(request, callback);
+                function callback(results, status) {
+                  console.log(results.length);
+                }
+                */
+               
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 search();
 
@@ -92,7 +101,7 @@
 
                 var control = document.getElementById('floating-panel');
                 control.style.display = 'block';
-                map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(control);
 
                 var stats = $('#legend');
                 stats.show();
@@ -138,8 +147,9 @@
                           addResult(results[i], i);
                         }
 
+                        //console.log(markers);     
                         stats.html('<h3>Stats</h3><div id="stats">Number of restaurant: <b>' + markers.length + '</b></div>');
-                        
+
                       }
                     });
                 }
