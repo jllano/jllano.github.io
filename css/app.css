@@ -16,7 +16,7 @@ html, body {
   height: 600px;
   overflow: auto;
   /*left: -190px;*/
-  top: 120px;
+  top: 60px;
   cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;
@@ -26,11 +26,12 @@ html, body {
   color: #000;
 }
 #filters{
-  /*width: 200px;*/
-  height: 60px;
+  padding: 10px;
+  width: 150px;
+  height: 170px;
   overflow: auto;
   /*left: -190px;*/
-  top: 60px;
+  top: 670px;
   cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;

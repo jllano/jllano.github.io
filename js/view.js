@@ -101,7 +101,7 @@
                 stats.css({'border':'3px solid #000'});
                 map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(document.getElementById('legend'));
 
-                map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('filters'));
+                map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('filters'));
 
                 function onPlaceChanged() {
                     var place = autocomplete.getPlace();
