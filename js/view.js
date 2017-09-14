@@ -101,7 +101,7 @@
 
                 var control = document.getElementById('floating-panel');
                 control.style.display = 'block';
-                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(control);
+                map.controls[google.maps.ControlPosition.TOP_RIGHT].push(document.getElementById('right-panel'));
 
                 var stats = $('#legend');
                 stats.show();
