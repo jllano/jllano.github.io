@@ -13,7 +13,7 @@ html, body {
 }
 #listing {
   /*width: 200px;*/
-  height: 100%;
+  height: 80%;
   overflow: auto;
   /*left: -190px;*/
   top: 1px;
@@ -29,17 +29,17 @@ html, body {
   padding: 10px;
   width: 150px;
   height: 170px;
-  overflow: auto;
+  
   /*left: -190px;*/
   /*top: 670px;*/
-  margin-right: 10px;
+  margin-right: 0px;
   cursor: pointer;
   overflow-x: hidden;
-  background-color: #fff;
-  border: 1px solid black;
-  opacity: 0.9;
-  filter: alpha(opacity=90); /* For IE8 and earlier */
-  color: #000;
+  background-color: #000;
+  border: 0px solid black;
+  opacity: 0.3;
+  filter: alpha(opacity=30); /* For IE8 and earlier */
+  color: #fff;
 }
 
 #locationField {
