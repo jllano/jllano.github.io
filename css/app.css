@@ -16,7 +16,7 @@ html, body {
   height: 600px;
   overflow: auto;
   /*left: -190px;*/
-  top: 60px;
+  top: 120px;
   cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;
