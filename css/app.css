@@ -13,7 +13,7 @@ html, body {
 }
 #listing {
   /*width: 200px;*/
-  height: 80%;
+  height: 75%;
   overflow: auto;
   /*left: -190px;*/
   top: 1px;
@@ -27,19 +27,19 @@ html, body {
 }
 #filters{
   padding: 10px;
-  width: 150px;
-  height: 170px;
+  width: 7%;
+  height: 150px;
   
   /*left: -190px;*/
   /*top: 670px;*/
   margin-right: 0px;
   cursor: pointer;
-  overflow-x: hidden;
+  
   background-color: #000;
   border: 0px solid black;
-  opacity: 0.7;
-  filter: alpha(opacity=70); /* For IE8 and earlier */
-  color: #fff;
+  opacity: 0.5;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+  color: #00ff00;
 }
 
 #locationField {
