@@ -87,7 +87,7 @@
                 
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 nearbySearch();
-                that.bindFilters(request, places, map, textSearch);
+                that.bindFilters(request, places, map, processSearch);
                 that.bindDrawingManager(map);
 
                 var directionsService = new google.maps.DirectionsService;
@@ -114,13 +114,14 @@
                         bounds: map.getBounds(),
                         //type: ['restaurant'],
                         radius: request.radius,
-                        query: place.name
+                        name: place.name
                     };
 
                     if (place.geometry) {
                         map.panTo(place.geometry.location);
                         map.setZoom(13);
-                        places.textSearch(newRequest, textSearch);
+                        //places.textSearch(newRequest, textSearch);
+                        places.nearbySearch(newRequest, processSearch);
                     } else {
                       document.getElementById('autocomplete').placeholder = 'Enter a restaurant in Cebu';
                     }
@@ -141,10 +142,9 @@
 
                 function processSearch(results, status){
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        directionPanel.style.display = 'none';
                         clearResults();
                         clearMarkers();
-                        directionPanel.style.display = 'none';
-
                         for (var i = 0; i < results.length; i++) {
                             var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
                             var markerIcon = MARKER_PATH + markerLetter + '.png';
@@ -228,7 +228,7 @@
         viewCommands[viewCmd]();
     };
 
-    View.prototype.bindFilters = function (request, places, map, textSearch) {
+    View.prototype.bindFilters = function (request, places, map, processSearch) {
         var that = this;    
 
         var filters = $( "#filters input:checkbox" );
@@ -250,7 +250,9 @@
                 keyword: that.filters.toString()
             };
 
-            places.textSearch(newRequest, textSearch);    
+            //places.textSearch(newRequest, textSearch);
+            
+            places.nearbySearch(newRequest, processSearch);
             
         });
 
