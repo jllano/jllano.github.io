@@ -27,6 +27,7 @@
         map = new google.maps.Map(that.mapContainer, {
           center: that.latLng,
           zoom: 13,
+          mapTypeControl: false,
           styles: [
   {
     "elementType": "geometry",

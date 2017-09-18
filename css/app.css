@@ -13,14 +13,14 @@ html, body {
 }
 #listing {
   /*width: 200px;*/
-  height: 600px;
+  height: 100%;
   overflow: auto;
   /*left: -190px;*/
-  top: 120px;
+  top: 1px;
   cursor: pointer;
   overflow-x: hidden;
   background-color: #fff;
-  border: 1px solid black;
+  border: 0px solid black;
   opacity: 0.9;
   filter: alpha(opacity=90); /* For IE8 and earlier */
   color: #000;
