@@ -143,7 +143,8 @@
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         clearResults();
                         clearMarkers();
-                    
+                        directionPanel.style.display = 'none';
+
                         for (var i = 0; i < results.length; i++) {
                             var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
                             var markerIcon = MARKER_PATH + markerLetter + '.png';
