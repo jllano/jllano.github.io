@@ -47,11 +47,13 @@
 
         this.resultTemplate
         = 	'<tr>'
-        +	'	<td>'
-		+	'		<img src="{{marker_icon}}" class="placeIcon" classname="placeIcon">'
+        +	'	<td width="300px">'
+        +	'		<b>{{place.name}}</b>'
+        +	'		<p>{{place.vicinity}}</p>'
+        +	'		<span {{style_rating_row}}>{{place.rate}}</span>'
         +	'	</td>'
-        +	'	<td>{{place.name}}</td>'
         +	'</tr>';
+        
 
 	}	
 
@@ -75,8 +77,24 @@
             photos = photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100});
         }
 
-        template = template.replace('{{marker_icon}}', photos);
+        //template = template.replace('{{marker_icon}}', photos);
         template = template.replace('{{place.name}}', result.name);
+        template = template.replace('{{place.vicinity}}', result.vicinity);
+
+        if (result.rating) {
+          var ratingHtml = '';
+          for (var i = 0; i < 5; i++) {
+            if (result.rating < (i + 0.5)) {
+              ratingHtml += '&#10025;';
+            } else {
+              ratingHtml += '&#10029;';
+            }
+          }
+          template = template.replace('{{style_rating_row}}', '');
+          template = template.replace('{{place.rate}}', ratingHtml);
+        } else {
+          template = template.replace('{{style_rating_row}}', 'style="display:none;"');
+        }
 
         return template;
     }
