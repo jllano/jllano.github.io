@@ -87,12 +87,12 @@
                 
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 nearbySearch();
-                that.bindFilters(request, places, map, processSearch, directionsDisplay);
+                that.bindFilters(request, places, map, processSearch);
                 that.bindDrawingManager(map);
 
                 var directionsService = new google.maps.DirectionsService;
                 var directionsDisplay = new google.maps.DirectionsRenderer;
-                
+                directionsDisplay.setMap(map);
                 directionsDisplay.setPanel(document.getElementById('right-panel'));
 
                 var directionPanel = document.getElementById('floating-panel');
@@ -142,7 +142,6 @@
 
                 function processSearch(results, status){
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        directionsDisplay.setMap(null);
                         directionPanel.style.display = 'none';
                         clearResults();
                         clearMarkers();
@@ -198,7 +197,7 @@
 
                 function showInfoWindow() {
                     var marker = this;
-                    directionsDisplay.setMap(map);
+                    
                     places.getDetails({placeId: marker.placeResult.place_id},
                         function(place, status) {
                             if (status !== google.maps.places.PlacesServiceStatus.OK) {
@@ -229,15 +228,13 @@
         viewCommands[viewCmd]();
     };
 
-    View.prototype.bindFilters = function (request, places, map, processSearch, directionsDisplay) {
+    View.prototype.bindFilters = function (request, places, map, processSearch) {
         var that = this;    
 
         var filters = $( "#filters input:checkbox" );
 
         $(filters).click(function() {
             
-            directionsDisplay.setMap(null);
-
             if ($(this).is(':checked')) {
                 that.filters.unshift($(this).val());
             } else {
