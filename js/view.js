@@ -96,7 +96,6 @@
                 directionsDisplay.setPanel(document.getElementById('right-panel'));
 
                 var directionPanel = document.getElementById('floating-panel');
-                directionPanel.style.display = 'block';
                 map.controls[google.maps.ControlPosition.TOP_RIGHT].push(directionPanel);
 
                 /*
@@ -210,6 +209,7 @@
                                 travelMode: 'DRIVING'
                             }, function(response, status) {
                                 if (status === 'OK') {
+                                    directionPanel.style.display = 'block';
                                     directionsDisplay.setDirections(response);
                                     infoWindow.open(map, marker);
                                     $("#info-content").html(that.template.showInfo(place));
