@@ -87,7 +87,7 @@
                 
                 autocomplete.addListener('place_changed', onPlaceChanged);
                 nearbySearch();
-                that.bindFilters(request, places, map, processSearch);
+                that.bindFilters(request, places, map, processSearch, directionsDisplay);
                 that.bindDrawingManager(map);
 
                 var directionsService = new google.maps.DirectionsService;
