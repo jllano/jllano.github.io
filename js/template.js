@@ -77,8 +77,6 @@
             photos = photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100});
         }
 
-        console.log(result);
-
         //template = template.replace('{{marker_icon}}', photos);
         template = template.replace('{{place.name}}', result.name);
         template = template.replace('{{place.vicinity}}', result.vicinity);
